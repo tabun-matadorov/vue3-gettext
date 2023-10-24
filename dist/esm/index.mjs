@@ -313,8 +313,12 @@ var translate = function (language) { return ({
             if (arr.length === 1 && n === 1) {
                 translationIndex = 0;
             }
-            var str = arr[translationIndex]; // empty string or undefined;
-            if (!str && typeof str !== "string") {
+            var str = arr[translationIndex];
+            if (!str) {
+                // If the translation is empty, use the untranslated string.
+                if (str === "") {
+                    return interp(untranslated, parameters);
+                }
                 throw new Error(msgid + " " + translationIndex + " " + language.current + " " + n);
             }
             return interp(str, parameters);
