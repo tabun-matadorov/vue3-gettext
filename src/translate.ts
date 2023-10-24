@@ -70,8 +70,13 @@ const translate = (language: Language) => ({
         translationIndex = 0;
       }
 
-      const str = arr[translationIndex]; // empty string or undefined;
-      if (!str && typeof str !== "string") {
+      const str = arr[translationIndex];
+      if (!str) {
+        // If the translation is empty, use the untranslated string.
+        if (str === "") {
+          return interp(untranslated, parameters);
+        }
+
         throw new Error(msgid + " " + translationIndex + " " + language.current + " " + n);
       }
 

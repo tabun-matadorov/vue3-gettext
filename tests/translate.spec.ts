@@ -79,15 +79,15 @@ describe("Translate tests", () => {
     expect(translated).toEqual("Untranslated %{ n } items");
 
     // Ensure that pluralization does not fail if the translation have empty strings for singural or plural form.
-    translated = translate.getTranslation("%{ orangeCount } orange", 1, null, null, "en_US");
-    expect(translated).toEqual("");
-    translated = translate.getTranslation("%{ orangeCount } orange", 2, null, null, "en_US");
+    translated = translate.getTranslation("%{ orangeCount } orange", 1, null, "%{ orangeCount } oranges", "en_US");
+    expect(translated).toEqual("%{ orangeCount } orange");
+    translated = translate.getTranslation("%{ orangeCount } orange", 2, null, "%{ orangeCount } oranges", "en_US");
     expect(translated).toEqual("%{ orangeCount } oranges");
 
-    translated = translate.getTranslation("%{ appleCount } apple", 1, null, null, "en_US");
+    translated = translate.getTranslation("%{ appleCount } apple", 1, null, "%{ appleCount } apples", "en_US");
     expect(translated).toEqual("1 apple");
-    translated = translate.getTranslation("%{ appleCount } apple", 2, null, null, "en_US");
-    expect(translated).toEqual("");
+    translated = translate.getTranslation("%{ appleCount } apple", 2, null, "%{ appleCount } apples", "en_US");
+    expect(translated).toEqual("%{ appleCount } apples");
 
     // Test plural message with multiple contexts (default context and 'Context'')
     translated = translate.getTranslation("%{ carCount } car (multiple contexts)", 1, null, null, "en_US");
